@@ -3,18 +3,19 @@
 /**
  *
  *
- * Copyright (c) 2011-2015 PayU India
+ * Copyright (c) 2011-2016 PayU India
  * @author     Ayush Mittal
- * @copyright  2009-2012 PayU India
+ * @copyright  2011-2016 PayU India
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version    2.0
+ * @version    3.0
  */
 
-class ControllerPaymentPayu extends Controller {
+class ControllerExtensionPaymentPayu extends Controller {
 	private $error = array(); 
 
 	public function index() {
-		$this->load->language('payment/payu');
+
+		$this->load->language('extension/payment/payu');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -25,7 +26,7 @@ class ControllerPaymentPayu extends Controller {
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
+            $this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true));
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -104,76 +105,13 @@ class ControllerPaymentPayu extends Controller {
 		$data['entry_pending_order_status'] = $this->language->get('entry_pending_order_status');
 		$data['entry_auth_order_status'] = $this->language->get('entry_auth_order_status');
 		$data['entry_cancelled_order_status'] = $this->language->get('entry_cancelled_order_status');
-		$data['entry_pg'] = $this->language->get('entry_pg');
+		
 		$data['CreditCard'] = $this->language->get('CreditCard');
 		$data['DebitCard'] = $this->language->get('DebitCard');
 		$data['NetBanking'] = $this->language->get('NetBanking');
 		$data['PayUMoney'] = $this->language->get('PayUMoney');
 		$data['PayUbiz'] = $this->language->get('PayUbiz');
-		$data['entry_bankcode'] = $this->language->get('entry_bankcode');
 
-		$data['payu_pg'][0] = array("name" => "Credit Card","value" => "CC");
-		$data['payu_pg'][1] = array("name" => "Debit Card","value" => "DC"); 
-		$data['payu_pg'][2] = array("name" => "NetBanking","value" => "NB"); 
-		$data['payu_pg'][3] = array("name" => "PayUMoney","value" => "wallet");
-	    $data['payu_pg'][5] = array("name" => "PayUbiz","value" => "");
-
-                        $data['payu_bankcode'][0] = array('value' => '', 'name' => 'PayUbiz');
-	                    $data['payu_bankcode'][1] = array('value' => 'payuw', 'name' => 'PayUw- PayUMoney');
-	                    $data['payu_bankcode'][2] = array('value' => 'BBCB', 'name' => 'Bank of Baroda Corporate Banking');
-	                    $data['payu_bankcode'][3] = array('value' => 'ALLB', 'name' => 'Allahabad Bank NetBanking');
-	                    $data['payu_bankcode'][4] = array('value' => 'ADBB', 'name' => 'Andhra Bank');
-	                    $data['payu_bankcode'][5] = array('value' => 'AXIB', 'name' => 'AXIS Bank NetBanking');
-	                    $data['payu_bankcode'][6] = array('value' => 'BBKB', 'name' => 'Bank of Bahrain and Kuwait');
-	                    $data['payu_bankcode'][7] = array('value' => 'BBRB', 'name' => 'Bank of Baroda Retail Banking');
-	                    $data['payu_bankcode'][8] = array('value' => 'BOIB', 'name' => 'Bank of India');
-	                    $data['payu_bankcode'][9] = array('value' => 'BOMB', 'name' => 'Bank of Maharashtra');
-	                    $data['payu_bankcode'][10] = array('value' => 'CABB', 'name' => 'Canara Bank');
-	                    $data['payu_bankcode'][11] = array('value' => 'CSBN', 'name' => 'Catholic Syrian Bank');
-	                    $data['payu_bankcode'][12] = array('value' => 'CBIB', 'name' => 'Central Bank Of India');
-	                    $data['payu_bankcode'][13] = array('value' => 'CITNB', 'name' => 'Citi Bank NetBanking');
-	                    $data['payu_bankcode'][14] = array('value' => 'CUBB', 'name' => 'CityUnion');
-	                    $data['payu_bankcode'][15] = array('value' => 'CRPB', 'name' => 'Corporation Bank');
-	                    $data['payu_bankcode'][16] = array('value' => 'DCBCORP', 'name' => 'DCB Bank - Corporate Netbanking');
-	                    $data['payu_bankcode'][17] = array('value' => 'DENN', 'name' => 'Dena Bank');
-	                    $data['payu_bankcode'][18] = array('value' => 'DSHB', 'name' => 'Deutsche Bank');
-	                    $data['payu_bankcode'][19] = array('value' => 'DCBB', 'name' => 'Development Credit Bank');
-	                    $data['payu_bankcode'][20] = array('value' => 'FEDB', 'name' => 'Federal Bank');
-	                    $data['payu_bankcode'][21] = array('value' => 'HDFB', 'name' => 'HDFC Bank');
-	                    $data['payu_bankcode'][22] = array('value' => 'ICIB', 'name' => 'ICICI Netbanking');
-	                    $data['payu_bankcode'][23] = array('value' => 'INDB', 'name' => 'Indian Bank');
-	                    $data['payu_bankcode'][24] = array('value' => 'INOB', 'name' => 'Indian Overseas Bank');
-	                    $data['payu_bankcode'][25] = array('value' => 'INIB', 'name' => 'IndusInd Bank');
-	                    $data['payu_bankcode'][26] = array('value' => 'IDBB', 'name' => 'Industrial Development Bank of India');
-	                    $data['payu_bankcode'][27] = array('value' => 'INGB', 'name' => 'ING Vysya Bank');
-	                    $data['payu_bankcode'][28] = array('value' => 'JAKB', 'name' => 'Jammu and Kashmir Bank');
-	                    $data['payu_bankcode'][29] = array('value' => 'KRKB', 'name' => 'Karnataka Bank');
-	                    $data['payu_bankcode'][30] = array('value' => 'KRVB', 'name' => 'Karur Vysya');
-	                    $data['payu_bankcode'][31] = array('value' => 'KRVB', 'name' => 'Karur Vysya - Corporate Netbanking');
-	                    $data['payu_bankcode'][32] = array('value' => '162B', 'name' => 'Kotak Bank');
-	                    $data['payu_bankcode'][33] = array('value' => 'LVCB', 'name' => 'Laxmi Vilas Bank-Corporate');
-	                    $data['payu_bankcode'][34] = array('value' => 'LVRB', 'name' => 'Laxmi Vilas Bank-Retail');
-	                    $data['payu_bankcode'][35] = array('value' => 'OBCB', 'name' => 'Oriental Bank of Commerce');
-	                    $data['payu_bankcode'][36] = array('value' => 'PNBB', 'name' => 'Punjab National Bank - Retail Banking');
-	                    $data['payu_bankcode'][37] = array('value' => 'CPNB', 'name' => 'Punjab National Bank-Corporate');
-	                    $data['payu_bankcode'][38] = array('value' => 'RTN', 'name' => 'Ratnakar Bank');
-	                    $data['payu_bankcode'][39] = array('value' => 'SRSWT', 'name' => 'Saraswat Bank');
-	                    $data['payu_bankcode'][40] = array('value' => 'SVCB', 'name' => 'Shamrao Vitthal Co-operative Bank');
-	                    $data['payu_bankcode'][41] = array('value' => 'SOIB', 'name' => 'South Indian Bank');
-	                    $data['payu_bankcode'][42] = array('value' => 'SDCB', 'name' => 'Standard Chartered Bank');
-	                    $data['payu_bankcode'][43] = array('value' => 'SBBJB', 'name' => 'State Bank of Bikaner and Jaipur');
-	                    $data['payu_bankcode'][44] = array('value' => 'SBHB', 'name' => 'State Bank of Hyderabad');
-	                    $data['payu_bankcode'][45] = array('value' => 'SBIB', 'name' => 'State Bank of India');
-	                    $data['payu_bankcode'][46] = array('value' => 'SBMB', 'name' => 'State Bank of Mysore');
-	                    $data['payu_bankcode'][47] = array('value' => 'SBPB', 'name' => ' State Bank of Patiala');
-	                    $data['payu_bankcode'][48] = array('value' => 'SBTB', 'name' => 'State Bank of Travancore');
-	                    $data['payu_bankcode'][49] = array('value' => 'UBIBC', 'name' => 'Union Bank - Corporate Netbanking');
-	                    $data['payu_bankcode'][50] = array('value' => 'UBIB', 'name' => 'Union Bank of India');
-	                    $data['payu_bankcode'][51] = array('value' => 'UNIB', 'name' => 'United Bank Of India');
-	                    $data['payu_bankcode'][52] = array('value' => 'VJYB', 'name' => 'Vijaya Bank');
-	                    $data['payu_bankcode'][53] = array('value' => 'YESB', 'name' => 'Yes Bank');   
-
-		
 	  if (isset($this->request->post['payu_captured_order_status_id'])) {
 					$data['payu_captured_order_status_id'] = $this->request->post['payu_captured_order_status_id'];
 				} else {
@@ -274,11 +212,11 @@ class ControllerPaymentPayu extends Controller {
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('payment/payu', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('extension/payment/payu', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
 				
-		$data['action'] = $this->url->link('payment/payu', 'token=' . $this->session->data['token'], 'SSL');
+		$data['action'] = $this->url->link('extension/payment/payu', 'token=' . $this->session->data['token'], 'SSL');
 		
 		$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 		
@@ -447,12 +385,12 @@ class ControllerPaymentPayu extends Controller {
 		
 
 				
-		$this->response->setOutput($this->load->view('payment/payu.tpl', $data));
+		$this->response->setOutput($this->load->view('extension/payment/payu.tpl', $data));
 
 	}
 
 	private function validate() {
-		if (!$this->user->hasPermission('modify', 'payment/payu')) {
+		if (!$this->user->hasPermission('modify', 'extension/payment/payu')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		

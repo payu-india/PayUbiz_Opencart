@@ -2,11 +2,11 @@
 /**
  *
  *
- * Copyright (c) 2011-2015 PayU India
+ * Copyright (c) 2011-2016 PayU India
  * @author     Ayush Mittal
- * @copyright  2009-2012 PayU India
+ * @copyright  2011-2016 PayU India
  * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version    2.0
+ * @version    3.0
  */
 // Heading
 $_['heading_title']      = 'PayU'; 

@@ -1,18 +1,7 @@
 <?php 
-
-/**
- *
- *
- * Copyright (c) 2011-2015 PayU India
- * @author     Ayush Mittal
- * @copyright  2009-2012 PayU India
- * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
- * @version    2.0
- */
- 
-class ModelPaymentPayu extends Model {
+class ModelExtensionPaymentPayu extends Model {
   	public function getMethod($address, $total) {
-		$this->load->language('payment/payu');
+		$this->load->language('extension/payment/payu');
 		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payu_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 		
@@ -39,8 +28,6 @@ class ModelPaymentPayu extends Model {
    
     	return $method_data;
   	}
-	
-	
 	
 }
 ?>

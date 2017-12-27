@@ -218,45 +218,6 @@
             </div>
           </div> 
 
-         
-
-            <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_pg; ?></label>
-            <div class="col-sm-10">
-              <select name="payu_payment_gateway" id="input-status" class="form-control">
-
-                <?php foreach ($data['payu_pg'] as  $payu_pg) { ?>
-                <?php if ($payu_pg['value'] == $payu_payment_gateway) {
-                     
-                 ?>
-                <option value="<?php echo $payu_pg['value']; ?>" selected="selected"><?php echo $payu_pg['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $payu_pg['value']; ?>"><?php echo $payu_pg['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-           
-               </select>
-            </div>
-          </div> 
-
-          <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_bankcode; ?></label>
-            <div class="col-sm-10">
-              <select name="payu_bankcode_val" id="input-status" class="form-control">
-
-                <?php foreach ($data['payu_bankcode'] as  $payu_bankcode) { ?>
-                <?php if ($payu_bankcode['value'] == $payu_bankcode_val) {?>
-                <option value="<?php echo $payu_bankcode['value']; ?>" selected="selected"><?php echo $payu_bankcode['name']; ?></option>
-                <?php } else { ?>
-                <option value="<?php echo $payu_bankcode['value']; ?>"><?php echo $payu_bankcode['name']; ?></option>
-                <?php } ?>
-                <?php } ?>
-           
-               </select>
-            </div>
-          </div> 
-
-
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-sort-order"><?php echo $entry_sort_order; ?></label>
             <div class="col-sm-10">
