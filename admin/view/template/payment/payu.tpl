@@ -30,20 +30,138 @@
       <div class="tab-content">
         <div class="tab-pane active" id="tab-general"> 
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-merchant"><?php echo $entry_merchant; ?></label>
+            <label class="col-sm-2 control-label" for="input-merchant"><?php echo $entry_merchantid1; ?></label>
             <div class="col-sm-10">
-              <input type="text" name="payu_merchant" value="<?php echo $payu_merchant; ?>" placeholder="<?php echo $entry_merchant; ?>" id="input-merchant" class="form-control" />
+              <input type="text" name="payu_merchantid1" value="<?php echo $payu_merchantid1; ?>" placeholder="<?php echo $entry_merchantid1; ?>" id="input-merchant" class="form-control" />
               <?php if ($error_merchant) { ?>
               <div class="text-danger"><?php echo $error_merchant; ?></div>
               <?php } ?>
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_salt; ?>"><?php echo $entry_salt; ?></span></label>
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_salt1; ?>"><?php echo $entry_salt1; ?></span></label>
             <div class="col-sm-10">
-              <input type="text" name="payu_salt" value="<?php echo $payu_salt; ?>" placeholder="<?php echo $entry_salt; ?>" id="input-password" class="form-control" />
+              <input type="text" name="payu_salt1" value="<?php echo $payu_salt1; ?>" placeholder="<?php echo $entry_salt1; ?>" id="input-password" class="form-control" />
             </div>
           </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="<?php echo $help_currency1; ?>"><?php echo $entry_currency1; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_currency1" value="<?php echo $payu_currency1; ?>" placeholder="<?php echo $entry_currency1; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_merchantid2; ?>"><?php echo $entry_merchantid2; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_merchantid2" value="<?php echo $payu_merchantid2; ?>" placeholder="<?php echo $entry_merchantid2; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_salt2; ?>"><?php echo $entry_salt2; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_salt2" value="<?php echo $payu_salt2; ?>" placeholder="<?php echo $entry_salt2; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="<?php echo $help_currency2; ?>"><?php echo $entry_currency2; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_currency2" value="<?php echo $payu_currency2; ?>" placeholder="<?php echo $entry_currency2; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_merchantid3; ?>"><?php echo $entry_merchantid3; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_merchantid3" value="<?php echo $payu_merchantid3; ?>" placeholder="<?php echo $entry_merchantid3; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_salt3; ?>"><?php echo $entry_salt3; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_salt3" value="<?php echo $payu_salt3; ?>" placeholder="<?php echo $entry_salt3; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="<?php echo $help_currency3; ?>"><?php echo $entry_currency3; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_currency3" value="<?php echo $payu_currency3; ?>" placeholder="<?php echo $entry_currency3; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_merchantid4; ?>"><?php echo $entry_merchantid4; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_merchantid4" value="<?php echo $payu_merchantid4; ?>" placeholder="<?php echo $entry_merchantid4; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_salt4; ?>"><?php echo $entry_salt4; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_salt4" value="<?php echo $payu_salt4; ?>" placeholder="<?php echo $entry_salt4; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="<?php echo $help_currency4; ?>"><?php echo $entry_currency4; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_currency4" value="<?php echo $payu_currency4; ?>" placeholder="<?php echo $entry_currency4; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_merchantid5; ?>"><?php echo $entry_merchantid5; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_merchantid5" value="<?php echo $payu_merchantid5; ?>" placeholder="<?php echo $entry_merchantid5; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_salt5; ?>"><?php echo $entry_salt5; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_salt5" value="<?php echo $payu_salt5; ?>" placeholder="<?php echo $entry_salt5; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="<?php echo $help_currency5; ?>"><?php echo $entry_currency5; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_currency5" value="<?php echo $payu_currency5; ?>" placeholder="<?php echo $entry_currency5; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_merchantid6; ?>"><?php echo $entry_merchantid6; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_merchantid6" value="<?php echo $payu_merchantid6; ?>" placeholder="<?php echo $entry_merchantid6; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-salt"><span data-toggle="tooltip" title="<?php echo $help_salt6; ?>"><?php echo $entry_salt6; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_salt6" value="<?php echo $payu_salt6; ?>" placeholder="<?php echo $entry_salt6; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-currency"><span data-toggle="tooltip" title="<?php echo $help_currency6; ?>"><?php echo $entry_currency6; ?></span></label>
+            <div class="col-sm-10">
+              <input type="text" name="payu_currency6" value="<?php echo $payu_currency6; ?>" placeholder="<?php echo $entry_currency6; ?>" id="input-password" class="form-control" />
+            </div>
+          </div>
+
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-test"><?php echo $entry_test; ?></label>
             <div class="col-sm-10">

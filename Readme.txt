@@ -1,11 +1,11 @@
-PayUbiz Opencart_V2.0.3.1 Module
+PayUbiz Opencart_V2.2.0.0 Module
 
 -----------------------------------------------------------------------------
 
 Copyright (c) 2011-2015 PayU india
 
 LICENSE:
- 
+
 This PayUbiz payment module is free software; you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published
 by the Free Software Foundation; either version 3 of the License, or (at

@@ -39,8 +39,8 @@ class ControllerPaymentPayu extends Controller {
 		$data['text_successful'] = $this->language->get('text_successful');
 		$data['text_fail'] = $this->language->get('text_fail');
 		$data['demo'] = $this->language->get('demo');		
-		$data['entry_merchant'] = $this->language->get('entry_merchant');
-		$data['entry_salt'] = $this->language->get('entry_salt');
+		$data['entry_merchantid1'] = $this->language->get('entry_merchantid1');
+		$data['entry_salt1'] = $this->language->get('entry_salt1');
 		$data['entry_test'] = $this->language->get('entry_test');
 		$data['entry_total'] = $this->language->get('entry_total');	
 		$data['entry_order_status'] = $this->language->get('entry_order_status');		
@@ -51,7 +51,46 @@ class ControllerPaymentPayu extends Controller {
 		$data['help_total'] = $this->language->get('help_total');
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
-        $data['help_salt'] = $this->language->get('help_salt');
+        $data['help_salt1'] = $this->language->get('help_salt1');
+
+        $data['help_currency1'] = $this->language->get('help_currency1');
+        $data['entry_currency1'] = $this->language->get('entry_currency1');
+
+        $data['help_salt2'] = $this->language->get('help_salt2');
+        $data['entry_salt2'] = $this->language->get('entry_salt2');
+        $data['help_merchantid2'] = $this->language->get('help_merchantid2');
+        $data['entry_merchantid2'] = $this->language->get('entry_merchantid2');
+        $data['help_currency2'] = $this->language->get('help_currency2');
+        $data['entry_currency2'] = $this->language->get('entry_currency2');
+
+        $data['help_salt3'] = $this->language->get('help_salt3');
+        $data['entry_salt3'] = $this->language->get('entry_salt3');
+        $data['help_merchantid3'] = $this->language->get('help_merchantid3');
+        $data['entry_merchantid3'] = $this->language->get('entry_merchantid3');
+        $data['help_currency3'] = $this->language->get('help_currency3');
+        $data['entry_currency3'] = $this->language->get('entry_currency3');
+
+        $data['help_salt4'] = $this->language->get('help_salt4');
+        $data['entry_salt4'] = $this->language->get('entry_salt4');
+        $data['help_merchantid4'] = $this->language->get('help_merchantid4');
+        $data['entry_merchantid4'] = $this->language->get('entry_merchantid4');
+        $data['help_currency4'] = $this->language->get('help_currency4');
+        $data['entry_currency4'] = $this->language->get('entry_currency4');
+
+        $data['help_salt5'] = $this->language->get('help_salt5');
+        $data['entry_salt5'] = $this->language->get('entry_salt5');
+        $data['help_merchantid5'] = $this->language->get('help_merchantid5');
+        $data['entry_merchantid5'] = $this->language->get('entry_merchantid5');
+        $data['help_currency5'] = $this->language->get('help_currency5');
+        $data['entry_currency5'] = $this->language->get('entry_currency5');
+
+        $data['help_salt6'] = $this->language->get('help_salt6');
+        $data['entry_salt6'] = $this->language->get('entry_salt6');
+        $data['help_merchantid6'] = $this->language->get('help_merchantid6');
+        $data['entry_merchantid6'] = $this->language->get('entry_merchantid6');
+        $data['help_currency6'] = $this->language->get('help_currency6');
+        $data['entry_currency6'] = $this->language->get('entry_currency6');
+
 		$data['tab_general'] = $this->language->get('tab_general');
 		$data['tab_order_status_payubiz'] = $this->language->get('tab_order_status_payubiz');
 		$data['entry_captured_order_status'] = $this->language->get('entry_captured_order_status');
@@ -243,16 +282,111 @@ class ControllerPaymentPayu extends Controller {
 		
 		$data['cancel'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL');
 		
-		if (isset($this->request->post['payu_merchant'])) {
-			$data['payu_merchant'] = $this->request->post['payu_merchant'];
+		if (isset($this->request->post['payu_merchantid1'])) {
+			$data['payu_merchantid1'] = $this->request->post['payu_merchantid1'];
 		} else {
-			$data['payu_merchant'] = $this->config->get('payu_merchant');
+			$data['payu_merchantid1'] = $this->config->get('payu_merchantid1');
 		}
-		
-		if (isset($this->request->post['payu_salt'])) {
-			$data['payu_salt'] = $this->request->post['payu_salt'];
+
+		if (isset($this->request->post['payu_currency1'])) {
+			$data['payu_currency1'] = $this->request->post['payu_currency1'];
 		} else {
-			$data['payu_salt'] = $this->config->get('payu_salt');
+			$data['payu_currency1'] = $this->config->get('payu_currency1');
+		}
+
+		if (isset($this->request->post['payu_merchantid2'])) {
+			$data['payu_merchantid2'] = $this->request->post['payu_merchantid2'];
+		} else {
+			$data['payu_merchantid2'] = $this->config->get('payu_merchantid2');
+		}
+
+		if (isset($this->request->post['payu_currency2'])) {
+			$data['payu_currency2'] = $this->request->post['payu_currency2'];
+		} else {
+			$data['payu_currency2'] = $this->config->get('payu_currency2');
+		}
+
+		if (isset($this->request->post['payu_merchantid3'])) {
+			$data['payu_merchantid3'] = $this->request->post['payu_merchantid3'];
+		} else {
+			$data['payu_merchantid3'] = $this->config->get('payu_merchantid3');
+		}
+
+		if (isset($this->request->post['payu_currency3'])) {
+			$data['payu_currency3'] = $this->request->post['payu_currency3'];
+		} else {
+			$data['payu_currency3'] = $this->config->get('payu_currency3');
+		}
+
+		if (isset($this->request->post['payu_merchantid4'])) {
+			$data['payu_merchantid4'] = $this->request->post['payu_merchantid4'];
+		} else {
+			$data['payu_merchantid4'] = $this->config->get('payu_merchantid4');
+		}
+
+		if (isset($this->request->post['payu_currency4'])) {
+			$data['payu_currency4'] = $this->request->post['payu_currency4'];
+		} else {
+			$data['payu_currency4'] = $this->config->get('payu_currency4');
+		}
+
+		if (isset($this->request->post['payu_merchantid5'])) {
+			$data['payu_merchantid5'] = $this->request->post['payu_merchantid5'];
+		} else {
+			$data['payu_merchantid5'] = $this->config->get('payu_merchantid5');
+		}
+
+		if (isset($this->request->post['payu_currency5'])) {
+			$data['payu_currency5'] = $this->request->post['payu_currency5'];
+		} else {
+			$data['payu_currency5'] = $this->config->get('payu_currency5');
+		}
+
+		if (isset($this->request->post['payu_merchantid6'])) {
+			$data['payu_merchantid6'] = $this->request->post['payu_merchantid6'];
+		} else {
+			$data['payu_merchantid6'] = $this->config->get('payu_merchantid6');
+		}
+
+		if (isset($this->request->post['payu_currency6'])) {
+			$data['payu_currency6'] = $this->request->post['payu_currency6'];
+		} else {
+			$data['payu_currency6'] = $this->config->get('payu_currency6');
+		}
+
+		if (isset($this->request->post['payu_salt1'])) {
+			$data['payu_salt1'] = $this->request->post['payu_salt1'];
+		} else {
+			$data['payu_salt1'] = $this->config->get('payu_salt1');
+		}
+
+		if (isset($this->request->post['payu_salt2'])) {
+			$data['payu_salt2'] = $this->request->post['payu_salt2'];
+		} else {
+			$data['payu_salt2'] = $this->config->get('payu_salt2');
+		}
+
+		if (isset($this->request->post['payu_salt3'])) {
+			$data['payu_salt3'] = $this->request->post['payu_salt3'];
+		} else {
+			$data['payu_salt3'] = $this->config->get('payu_salt3');
+		}
+
+		if (isset($this->request->post['payu_salt4'])) {
+			$data['payu_salt4'] = $this->request->post['payu_salt4'];
+		} else {
+			$data['payu_salt4'] = $this->config->get('payu_salt4');
+		}
+
+		if (isset($this->request->post['payu_salt5'])) {
+			$data['payu_salt5'] = $this->request->post['payu_salt5'];
+		} else {
+			$data['payu_salt5'] = $this->config->get('payu_salt5');
+		}
+		if (isset($this->request->post['payu_salt6'])) {
+			$data['payu_salt6'] = $this->request->post['payu_salt6'];
+		} else {
+			$data['payu_salt6'] = $this->config->get('payu_salt6');
 		}
 		
 		
@@ -322,11 +456,11 @@ class ControllerPaymentPayu extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
-		if (!$this->request->post['payu_merchant']) {
+		if (!$this->request->post['payu_merchantid1']) {
 			$this->error['merchant'] = $this->language->get('error_merchant');
 		}
 			
-		if (!$this->request->post['payu_salt']) {
+		if (!$this->request->post['payu_salt1']) {
 			$this->error['salt'] = $this->language->get('error_salt');
 		}
 		
