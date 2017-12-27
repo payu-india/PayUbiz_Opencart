@@ -12,14 +12,16 @@
 		<input type="hidden" name="Furl" value="<?php echo $Furl; ?>" />
 		<input type="hidden" name="curl" value="<?php echo $curl; ?>" />
 		<input type="hidden" name="Hash" value="<?php echo $Hash;?>" />
-		<input type="hidden" name="Pg" value="<?php echo $Pg; ?>" />
+		
 		<input type="hidden" name="address1" value="<?php echo $address1; ?>" />
         <input type="hidden" name="address2" value="<?php echo $address2; ?>" />
         <input type="hidden" name="city" value="<?php echo $city; ?>" />
         <input type="hidden" name="country" value="<?php echo $country; ?>" />
         <input type="hidden" name="state" value="<?php echo $state; ?>" />
+        <input type="hidden" name="pg" value="<?php echo $pg; ?>" />
+        <input type="hidden" name="bankcode" value="<?php echo $bankcode; ?>" />
 		<div class="buttons">
-    <div class="right"><a onclick="$('#payu_form').submit();" class="button"><span><?php echo $button_confirm;  ?></span></a></div>
+    <div class="pull-right"><input type="submit" value="<?php echo $button_confirm; ?>" class="btn btn-primary" /></div>
   </div>
 	</form>	
 	

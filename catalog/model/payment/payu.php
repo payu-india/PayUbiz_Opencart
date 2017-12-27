@@ -1,4 +1,15 @@
 <?php 
+
+/**
+ *
+ *
+ * Copyright (c) 2011-2015 PayU India
+ * @author     Ayush Mittal
+ * @copyright  2009-2012 PayU India
+ * @license    http://www.opensource.org/licenses/lgpl-license.php LGPL
+ * @version    2.0
+ */
+ 
 class ModelPaymentPayu extends Model {
   	public function getMethod($address, $total) {
 		$this->load->language('payment/payu');
@@ -21,6 +32,7 @@ class ModelPaymentPayu extends Model {
       		$method_data = array( 
         		'code'       => 'payu',
         		'title'      => $this->language->get('text_title'),
+				'terms'      => '',
 				'sort_order' => $this->config->get('payu_sort_order')
       		);
     	}

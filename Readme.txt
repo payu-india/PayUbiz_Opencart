@@ -1,10 +1,31 @@
-------- PayUbiz Opencart Plugins -------
+PayUbiz Opencart_V2.0.3.1 Module
 
-Copyright (c) PayU india
+-----------------------------------------------------------------------------
 
-Please follow the below steps to download opencart plugin as per requirement:
+Copyright (c) 2011-2015 PayU india
 
-1. Please Enter Plugin name(say opencart ) in Search Repositories.
-2. click on Branch: Master.
-3. Select Tag menu.
-4. Select Require Version of the plugin.
+LICENSE:
+ 
+This PayUbiz payment module is free software; you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation; either version 3 of the License, or (at
+your option) any later version.
+
+This payment module is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+License for more details.
+
+Please see http://www.opensource.org/licenses/ for a copy of the GNU Lesser
+General Public License.
+
+If You have any Issue Please Mail Us at integration@payu.in.
+
+
+******************************************************************************
+*                                                                            *
+*    Please see the URL below for all information concerning this module:    *
+*                                                                            *
+*                   http://www.payu.in                                       *
+*                                                                            *
+******************************************************************************

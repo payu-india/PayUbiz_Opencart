@@ -1,102 +1,100 @@
 <?php
 class ControllerPaymentPayu extends Controller {
-	protected function index() {
-    	$this->data['button_confirm'] = $this->language->get('button_confirm');
 
+	public function index() {	
+    	$data['button_confirm'] = $this->language->get('button_confirm');
 		$this->load->model('checkout/order');
 		$this->language->load('payment/payu');
-		
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
-		$this->data['merchant'] = $this->config->get('payu_merchant');
+		
+		$data['merchant'] = $this->config->get('payu_merchant');
+
+		$currency_code = $order_info['currency_code']; 
+		$calculatedAmount_INR = $order_info['total']; 
 		
 		 /////////////////////////////////////Start Payu Vital  Information /////////////////////////////////
 		
 		if($this->config->get('payu_test')=='demo')
-			$this->data['action'] = 'https://test.payu.in/_payment.php';
+			$data['action'] = 'https://test.payu.in/_payment.php';
 		else
-		    $this->data['action'] = 'https://secure.payu.in/_payment.php';
+		    $data['action'] = 'https://secure.payu.in/_payment.php';
 			
-		$txnid = $this->session->data['order_id'];
-                
-		$this->data['key'] = $this->config->get('payu_merchant');
-		$this->data['salt'] = $this->config->get('payu_salt');
-		$this->data['txnid'] = $txnid;
-		$this->data['amount'] = $order_info['total'];
-		$this->data['productinfo'] = 'opencart products information';
-		$this->data['firstname'] = $order_info['payment_firstname'];
-		$this->data['Lastname'] = $order_info['payment_lastname'];
-		$this->data['Zipcode'] = $order_info['payment_postcode'];
-		$this->data['email'] = $order_info['email'];
-		$this->data['phone'] = $order_info['telephone'];
-		$this->data['address1'] = $order_info['payment_address_1'];
-        $this->data['address2'] = $order_info['payment_address_2'];
-        $this->data['state'] = $order_info['payment_zone'];
-        $this->data['city']=$order_info['payment_city'];
-        $this->data['country']=$order_info['payment_country'];
-		
-		$this->data['surl'] = $this->url->link('payment/payu/callback');
-		$this->data['Furl'] = $this->url->link('payment/payu/callback');
-		$this->data['curl'] = $this->url->link('payment/payu/callback');
-		
+		$txnid        = 	$this->session->data['order_id'];
+		                
+		$data['key'] = $this->config->get('payu_merchant');
+		$data['salt'] = $this->config->get('payu_salt');
+		$data['txnid'] = $txnid;
+		$data['amount'] = $calculatedAmount_INR;		
+		$data['productinfo'] = 'opencart products information';
+		$data['firstname'] = $order_info['payment_firstname'];
+		$data['Lastname'] = $order_info['payment_lastname'];
+		$data['Zipcode'] = $order_info['payment_postcode'];
+		$data['email'] = $order_info['email'];
+		$data['phone'] = $order_info['telephone'];
+		$data['address1'] = $order_info['payment_address_1'];
+        $data['address2'] = $order_info['payment_address_2'];
+        $data['state'] = $order_info['payment_zone'];
+        $data['city']=$order_info['payment_city'];
+        $data['country']=$order_info['payment_country'];
+
+        $data['surl'] = $this->url->link('payment/payu/callback');
+		$data['Furl'] = $this->url->link('payment/payu/callback');
+		$data['curl'] = $this->url->link('payment/payu/callback');
+
 		// For https SSL, please update below value for the response.
 		//$this->url->link('payment/payu/callback', '', 'SSL')
 		
-		
-		$key          =  $this->config->get('payu_merchant');
+		$key          = $this->config->get('payu_merchant');
 		$amount       = $order_info['total'];
-		$productInfo  = $this->data['productinfo'];
-		$firstname    = $order_info['payment_firstname'];
+		$productInfo  = $data['productinfo'];
+	    $firstname    = $order_info['payment_firstname'];
 		$email        = $order_info['email'];
 		$salt         = $this->config->get('payu_salt');
 		
-		$hash_string = $key.'|'.$txnid.'|'.$amount.'|'.$productInfo.'|'.$firstname.'|'.$email.'|||||||||||'.$salt;
-		$Hash=strtolower(hash('sha512', $hash_string));
+		$hash_string = $key.'|'.$txnid.'|'.$calculatedAmount_INR.'|'.$productInfo.'|'.$firstname.'|'.$email.'|||||||||||'.$salt;		
+		$Hash = strtolower(hash('sha512', $hash_string));
 		
-		$this->data['user_credentials'] = $this->data['key'].':'.$this->data['email'];
-		$this->data['Hash'] = $Hash;
-		
+		$data['user_credentials'] = $this->data['key'].':'.$this->data['email'];
+		$data['Hash'] = $Hash;
 			/////////////////////////////////////End Payu Vital  Information /////////////////////////////////
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/payu.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/payment/payu.tpl';
+			return $this->load->view($this->config->get('config_template') . '/template/payment/payu.tpl', $data);
 		} else {
-			$this->template = 'default/template/payment/payu.tpl';
-		}
-
-		$this->render();
+			return $this->load->view('default/template/payment/payu.tpl', $data);
+		}		
 	}
 	
 	public function callback() {
+		
 		if (isset($this->request->post['key']) && ($this->request->post['key'] == $this->config->get('payu_merchant'))) {
 			$this->language->load('payment/payu');
 			
-			$this->data['title'] = sprintf($this->language->get('heading_title'), $this->config->get('config_name'));
+			$data['title'] = sprintf($this->language->get('heading_title'), $this->config->get('config_name'));
 
 			if (!isset($this->request->server['HTTPS']) || ($this->request->server['HTTPS'] != 'on')) {
-				$this->data['base'] = HTTP_SERVER;
+				$data['base'] = HTTP_SERVER;
 			} else {
-				$this->data['base'] = HTTPS_SERVER;
+				$data['base'] = HTTPS_SERVER;
 			}
-		
-			$this->data['charset'] = $this->language->get('charset');
-			$this->data['language'] = $this->language->get('code');
-			$this->data['direction'] = $this->language->get('direction');
-			$this->data['heading_title'] = sprintf($this->language->get('heading_title'), $this->config->get('config_name'));
-			$this->data['text_response'] = $this->language->get('text_response');
-			$this->data['text_success'] = $this->language->get('text_success');
-			$this->data['text_success_wait'] = sprintf($this->language->get('text_success_wait'), $this->url->link('checkout/success'));
-			$this->data['text_failure'] = $this->language->get('text_failure');
-			$this->data['text_cancelled'] = $this->language->get('text_cancelled');
-			$this->data['text_cancelled_wait'] = sprintf($this->language->get('text_cancelled_wait'), $this->url->link('checkout/cart'));
-			$this->data['text_pending'] = $this->language->get('text_pending');
-			$this->data['text_failure_wait'] = sprintf($this->language->get('text_failure_wait'), $this->url->link('checkout/cart'));
+			$data['custom_field'] = 'hhhh';
+			$data['charset'] = $this->language->get('charset');
+			$data['language'] = $this->language->get('code');
+			$data['direction'] = $this->language->get('direction');
+			$data['heading_title'] = sprintf($this->language->get('heading_title'), $this->config->get('config_name'));
+			$data['text_response'] = $this->language->get('text_response');
+			$data['text_success'] = $this->language->get('text_success');
+			$data['text_success_wait'] = sprintf($this->language->get('text_success_wait'), $this->url->link('checkout/success'));
+			$data['text_failure'] = $this->language->get('text_failure');
+			$data['text_cancelled'] = $this->language->get('text_cancelled');
+			$data['text_cancelled_wait'] = sprintf($this->language->get('text_cancelled_wait'), $this->url->link('checkout/cart'));
+			$data['text_pending'] = $this->language->get('text_pending');
+			$data['text_failure_wait'] = sprintf($this->language->get('text_failure_wait'), $this->url->link('checkout/cart'));
 			
 			 $this->load->model('checkout/order');
-			 
+
 			 $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 			 $orderid=$order_info['order_id'];
 			 $calculatedAmount_INR = $order_info['total'];
-
-			 //$order_info = $this->model_checkout_order->getOrder($orderid);
 			 
 				$key          		=  	$this->request->post['key'];
 				$amount      		= 	number_format((float)$calculatedAmount_INR, 2,'.','');
@@ -104,15 +102,14 @@ class ControllerPaymentPayu extends Controller {
 				$firstname    		= 	$this->request->post['firstname'];
 				$email        		=	$this->request->post['email'];
 				$salt        		= 	$this->config->get('payu_salt');
-				$txnid		 		=   $orderid;
+				$txnid		 		=   $orderid ; 
 				$keyString 	  		=  	$key.'|'.$txnid.'|'.$amount.'|'.$productInfo.'|'.$firstname.'|'.$email.'||||||||||';
 				$keyArray 	  		= 	explode("|",$keyString);
 				$reverseKeyArray 	= 	array_reverse($keyArray);
-				$reverseKeyString	=	implode("|",$reverseKeyArray);
-			 
+				$reverseKeyString	=	implode("|",$reverseKeyArray);	
 			 
 			 if ((isset($this->request->post['status']) && $this->request->post['status'] == 'success') && ($txnid == $this->request->post['txnid'])) {
-
+			 	
 				if(!empty($this->request->post['additionalCharges'])){
 					$additionalCharges 	= 	$this->request->post['additionalCharges'];
 					$saltString     = $additionalCharges.'|'.$salt.'|'.$this->request->post['status'].'|'.$reverseKeyString;
@@ -130,66 +127,101 @@ class ControllerPaymentPayu extends Controller {
 				foreach($this->request->post as $k => $val){
 					$message .= $k.': ' . $val . "\n";
 				}
-			if($sentHashString==$this->request->post['hash'] && ($amount == $this->request->post['amount'])){
-				$this->model_checkout_order->confirm($this->request->post['txnid'], $this->config->get('payu_order_status_id'));
-				$this->model_checkout_order->update($this->request->post['txnid'], $this->config->get('payu_order_status_id'), $message,false);
-				$this->data['continue'] = $this->url->link('checkout/success');
-				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/payu_success.tpl')) {
-					$this->template = $this->config->get('config_template') . '/template/payment/payu_success.tpl';
-				} else {
-					$this->template = 'default/template/payment/payu_success.tpl';
-				}
-				
-				$this->children = array(
-					'common/column_left',
-					'common/column_right',
-					'common/content_top',
-					'common/content_bottom',
-					'common/footer',
-					'common/header'
-				);
-					
-				$this->response->setOutput($this->render());
-			  } else {
-				//Transaction will be pending
-				$this->model_checkout_order->confirm($this->request->post['txnid'],1);
-				$this->model_checkout_order->update($this->session->data['order_id'], 1, $message, false);
-				$this->data['continue'] = $this->url->link('checkout/checkout', '', 'SSL');
-				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/payu_pending.tpl')) {
-					$this->template = $this->config->get('config_template') . '/template/payment/payu_pending.tpl';
-				} else {
-					$this->template = 'default/template/payment/payu_pending.tpl';
-				}	
-				$this->children = array(
-					'common/column_left',
-					'common/column_right',
-					'common/content_top',
-					'common/content_bottom',
-					'common/footer',
-					'common/header'
-				);
-				$this->response->setOutput($this->render());		
-			  } 
+				if($sentHashString==$this->request->post['hash'] && ($amount == $this->request->post['amount'])){
+
+					if($this->request->post['unmappedstatus'] == 'captured')
+					{
+						$payu_captured_order_status_id = $this->config->get('payu_captured_order_status_id');
+						$this->model_checkout_order->addOrderHistory($orderid, $payu_captured_order_status_id);
+					} elseif ($this->request->post['unmappedstatus'] == 'auth')
+					{
+						$payu_auth_order_status_id = $this->config->get('payu_auth_order_status_id');
+						$this->model_checkout_order->addOrderHistory($orderid, $payu_auth_order_status_id);
+					}
+						$this->model_checkout_order->addOrderHistory($this->request->post['txnid'], $this->config->get('payu_captured_order_status_id'), $message, false);
+						$data['continue'] = $this->url->link('checkout/success');
+						$data['column_left'] = $this->load->controller('common/column_left');
+						$data['column_right'] = $this->load->controller('common/column_right');
+						$data['content_top'] = $this->load->controller('common/content_top');
+						$data['content_bottom'] = $this->load->controller('common/content_bottom');
+						$data['footer'] = $this->load->controller('common/footer');
+						$data['header'] = $this->load->controller('common/header');
+						if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/payu_success.tpl')) {
+							$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/payment/payu_success.tpl', $data));
+						} else {
+							$this->response->setOutput($this->load->view('default/template/payment/payu_success.tpl', $data));
+						}	
+					}else{
+						echo "Transaction has been tampered. Please try again";
+						exit();
+					}
 			 }else {
-    			$this->data['continue'] = $this->url->link('checkout/cart');
-		
-				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/payu_failure.tpl')) {
-					$this->template = $this->config->get('config_template') . '/template/payment/payu_failure.tpl';
+    			$data['continue'] = $this->url->link('checkout/cart');
+				$data['column_left'] = $this->load->controller('common/column_left');
+				$data['column_right'] = $this->load->controller('common/column_right');
+				$data['content_top'] = $this->load->controller('common/content_top');
+				$data['content_bottom'] = $this->load->controller('common/content_bottom');
+				$data['footer'] = $this->load->controller('common/footer');
+				$data['header'] = $this->load->controller('common/header');
+
+		        if(isset($this->request->post['status']) && $this->request->post['unmappedstatus'] == 'userCancelled')
+				{
+					$payu_user_cancelled_order_status_id = $this->config->get('payu_user_cancelled_order_status_id');
+							$this->model_checkout_order->addOrderHistory($orderid, $payu_user_cancelled_order_status_id);
+
+				 if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/payu_cancelled.tpl')) {
+					$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/payment/payu_cancelled.tpl', $data));
 				} else {
-					$this->template = 'default/template/payment/payu_failure.tpl';
+					
+					 $payu_cancelled_order_status_id = $this->config->get('payu_cancelled_order_status_id');
+					$this->model_checkout_order->addOrderHistory($orderid, $payu_cancelled_order_status_id);
+
+				    $this->response->setOutput($this->load->view('default/template/payment/payu_cancelled.tpl', $data));
+				}
+				}
+				else {
+				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/payu_failure.tpl')) {
+					$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/payment/payu_failure.tpl', $data));
+				} else {
+					
+					$this->response->setOutput($this->load->view('default/template/payment/payu_failure.tpl', $data));
 				}	
 				
-				$this->children = array(
-					'common/column_left',
-					'common/column_right',
-					'common/content_top',
-					'common/content_bottom',
-					'common/footer',
-					'common/header'
-				);
-				$this->response->setOutput($this->render());						
+				}					
 			}
 		}
+
+			if($this->request->post['unmappedstatus'] == 'initiated')
+						{
+							
+							$payu_initiated_order_status_id = $this->config->get('payu_initiated_order_status_id');
+							$this->model_checkout_order->addOrderHistory($orderid, $payu_initiated_order_status_id);
+
+						} elseif ($this->request->post['unmappedstatus'] == 'in progress')
+						{
+							$payu_inprogress_order_status_id = $this->config->get('payu_inprogress_order_status_id');
+							$this->model_checkout_order->addOrderHistory($orderid, $payu_inprogress_order_status_id);
+						} elseif ($this->request->post['unmappedstatus'] == 'dropped')
+						{
+							$payu_dropped_order_status_id = $this->config->get('payu_dropped_order_status_id');
+							$this->model_checkout_order->addOrderHistory($orderid, $payu_dropped_order_status_id);
+						} elseif ($this->request->post['unmappedstatus'] == 'bounced')
+						{
+							$payu_bounced_order_status_id = $this->config->get('payu_bounced_order_status_id');
+							$this->model_checkout_order->addOrderHistory($orderid, $payu_bounced_order_status_id);
+						} elseif ($this->request->post['unmappedstatus'] == 'failed')
+						{
+							$payu_failed_order_status_id = $this->config->get('payu_failed_order_status_id');
+							$this->model_checkout_order->addOrderHistory($orderid, $payu_failed_order_status_id);
+						} elseif ($this->request->post['unmappedstatus'] == 'pending')
+						{
+							$payu_pending_order_status_id = $this->config->get('payu_pending_order_status_id');
+							$this->model_checkout_order->addOrderHistory($orderid, $payu_pending_order_status_id);
+						} 
+
+						$sql2 = "UPDATE " . DB_PREFIX . "order SET custom_field = 'mihpayid :-" .$this->request->post['mihpayid'] ."' WHERE order_id= '" .$orderid . "'";
+						 $query2 = $this->db->query($sql2);
+							
 	}
 }
 ?>
